@@ -13,7 +13,7 @@ function handlePhotoUrlInput(event) {
 
 const $journalForm = document.querySelector('.journal-entry');
 const $title = document.querySelector('#title');
-const $notes = document.querySelector('.notes');
+const $notes = document.querySelector('#notes');
 
 $journalForm.addEventListener('submit', addButtonHandler);
 
@@ -28,8 +28,6 @@ function addButtonHandler(event) {
   data.nextEntryId++;
   data.entries.unshift(journalEntry);
 
-  $title.value = '';
-  $photoUrl.value = '';
-  $notes.value = '';
+  $journalForm.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
 }

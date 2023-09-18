@@ -19,17 +19,19 @@
     <header>
       <div class="container">
         <div class="row">
-          <div class="column-full page-header">Code Journal</div>
+          <div class="column-full">
+            <h1>Code Journal</h1>
+          </div>
         </div>
       </div>
     </header>
     <main class="container">
-      <div class="row">
-        <div class="column-full">
-          <h1>New Entry</h1>
-        </div>
-      </div>
       <form class="journal-entry">
+        <div class="row">
+          <div class="column-full">
+            <h1>New Entry</h1>
+          </div>
+        </div>
         <div class="row">
           <div class="column-half">
             <img
@@ -52,12 +54,10 @@
         </div>
         <div class="row">
           <div class="column-full">
-            <div class="note-label">Notes</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <textarea rows="10" required class="notes"></textarea>
+            <div>
+              <label for="notes">Notes</label>
+            </div>
+            <textarea rows="6" required id="notes"></textarea>
           </div>
         </div>
         <div class="row">
@@ -67,8 +67,8 @@
             </div>
           </div>
         </div>
+        <div data-view="entries" class="hidden"></div>
       </form>
-      <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
