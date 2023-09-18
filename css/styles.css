@@ -2,4 +2,39 @@ header {
   background-color: darkorchid;
   color: white;
   font-size: 1.5rem;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.image {
+  width: 100%;
+}
+
+#title {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#photo-url {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.notes {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button-justify {
+  display: flex;
+  justify-content: end;
+}
+
+.save {
+  background-color: purple;
+  color: white;
+  padding: 0.75rem;
 }

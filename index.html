@@ -18,12 +18,53 @@
   <body>
     <header>
       <div class="container">
-        <div class="column-full page-header">Code Journal</div>
+        <div class="row">
+          <div class="column-full page-header">Code Journal</div>
+        </div>
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form">
-        <textarea></textarea>
+      <div class="row">
+        <div class="column-full">
+          <h1>New Entry</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <img
+            class="image"
+            src="images/placeholder-image-square.jpg"
+            alt="placeholder image" />
+        </div>
+        <div class="column-half">
+          <div data-view="entry-form">
+            <form>
+              <label class="text-field-label" for="title">Title</label>
+              <div>
+                <textarea id="title"></textarea>
+              </div>
+              <label for="photo-url"> Photo URL</label>
+              <div>
+                <textarea id="photo-url"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">Notes</div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <textarea class="notes"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <div class="button-justify">
+            <button class="save" type="button">Save</button>
+          </div>
+        </div>
       </div>
       <div data-view="entries" class="hidden"></div>
     </main>
