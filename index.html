@@ -26,49 +26,51 @@
       </div>
     </header>
     <main class="container">
-      <form class="journal-entry">
-        <div class="row">
-          <div class="column-full">
-            <h1>New Entry</h1>
+      <div data-view="entry-form">
+        <form class="journal-entry">
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="column-half">
-            <img
-              class="image"
-              src="images/placeholder-image-square.jpg"
-              alt="placeholder image" />
-          </div>
-          <div class="column-half">
-            <div data-view="entry-form">
-              <label class="text-field-label" for="title">Title</label>
-              <div>
-                <input type="text" required id="title" />
+          <div class="row">
+            <div class="column-half">
+              <img
+                class="image"
+                src="images/placeholder-image-square.jpg"
+                alt="placeholder image" />
+            </div>
+            <div class="column-half">
+              <div data-view="entry-form">
+                <label class="text-field-label" for="title">Title</label>
+                <div>
+                  <input type="text" required id="title" />
+                </div>
+                <label for="photo-url"> Photo URL</label>
+                <div>
+                  <input type="text" required id="photo-url" />
+                </div>
               </div>
-              <label for="photo-url"> Photo URL</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
               <div>
-                <input type="text" required id="photo-url" />
+                <label for="notes">Notes</label>
+              </div>
+              <textarea rows="6" required id="notes"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="button-justify">
+                <button class="save" type="submit">Save</button>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <div>
-              <label for="notes">Notes</label>
-            </div>
-            <textarea rows="6" required id="notes"></textarea>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full">
-            <div class="button-justify">
-              <button class="save" type="submit">Save</button>
-            </div>
-          </div>
-        </div>
-        <div data-view="entries" class="hidden"></div>
-      </form>
+          <div data-view="entries" class="hidden"></div>
+        </form>
+      </div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
