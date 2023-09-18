@@ -1,0 +1,44 @@
+body {
+  background-color: #eee;
+}
+
+header {
+  background-color: #4c2676;
+  color: white;
+  font-weight: 600;
+}
+
+.image {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+#title {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#photo-url {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#notes {
+  width: 100%;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.button-justify {
+  display: flex;
+  justify-content: end;
+}
+
+.save {
+  background-color: #4c2474;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
