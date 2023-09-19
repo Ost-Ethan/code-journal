@@ -4,6 +4,8 @@ const $image = document.querySelector('.image');
 $photoUrl.addEventListener('input', handlePhotoUrlInput);
 
 function handlePhotoUrlInput(event) {
+  // This function checks the input of the PhotoURL and will replace the placeholder with an image if given a valid link or filepath.
+
   if ($photoUrl.value === '') {
     $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   } else {
@@ -19,6 +21,10 @@ $journalForm.addEventListener('submit', addButtonHandler);
 
 function addButtonHandler(event) {
   event.preventDefault();
+
+  // This parses the data input by the user, prepends it to the list of entries, and switches the view to the entries view.
+
+  // Data parsing
   const journalEntry = {
     title: $title.value,
     photoUrl: $photoUrl.value,
@@ -28,8 +34,17 @@ function addButtonHandler(event) {
   data.nextEntryId++;
   data.entries.unshift(journalEntry);
 
+  // Resetting the form after parsing
   $journalForm.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+  // Rendering the entry and prepending it to the list
+  $divDataViewEntries.prepend(renderEntry(journalEntry));
+
+  viewSwap($entriesButton); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
 }
 
 function renderEntry(entry) {
@@ -83,39 +98,56 @@ function renderEntry(entry) {
 }
 
 document.addEventListener('DOMContentLoaded', loadEntryListItems);
+
 const $divDataViewEntries = document.querySelector('#entry-list');
+
 const $spanNoEntries = document.querySelector('.no-entries');
+
 function loadEntryListItems(event) {
+  // This function sees if there are any entries in local storage and then renders them on the entries page.
+
   for (let i = 0; i < data.entries.length; i++) {
     const $renderedListItem = renderEntry(data.entries[i]);
     $divDataViewEntries.appendChild($renderedListItem);
   }
+  viewSwap(data.view);
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
 }
 
 function toggleNoEntries() {
-  if ($spanNoEntries.className === 'no-entries')
+  if ($spanNoEntries.className === 'no-entries') {
     $spanNoEntries.className = 'no-entries hidden';
-  else {
-    $spanNoEntries.className = 'no-entries';
+  } else {
+    $spanNoEntries.className = 'no entries';
   }
 }
 
 function viewSwap(viewName) {
-  // console.log("View provided as arguement:", viewName);
-  // console.log("viewName.target", viewName.target);
-
-  if (viewName.target === $entriesButton) {
+  // This function is called on when switching views. It looks to see what target clicked the button, and then changes data.view to reflect the anchor clicked. I gave the OR operator, as when we click the submit button, i pass the element "$entriesButton" itself as viewName. A bit backwards, but it works.
+  if (viewName.target === $entriesButton || viewName === $entriesButton) {
     data.view = 'entries';
-  } else if (viewName.target === $newEntryButton) {
+    $entryFormDataView.className = 'hidden';
+  } else if (
+    viewName.target === $newEntryButton ||
+    viewName === $newEntryButton
+  ) {
     data.view = 'entry-form';
   }
-
-  // console.log("value of data.view:", data.view)
+  if (data.view === 'entries') {
+    $entryFormDataView.className = 'hidden';
+    $entriesDataView.className = '';
+  } else if (data.view === 'entry-form') {
+    $entryFormDataView.className = '';
+    $entriesDataView.className = 'hidden';
+  }
 }
 
+const $entryFormDataView = document.querySelector('#entry-form');
+const $entriesDataView = document.querySelector('#entries');
 const $newEntryButton = document.querySelector('.new-entry-button');
 const $entriesButton = document.querySelector('.head-anchor');
 $entriesButton.addEventListener('click', viewSwap);
 $newEntryButton.addEventListener('click', viewSwap);
 toggleNoEntries();
-viewSwap('entries');
