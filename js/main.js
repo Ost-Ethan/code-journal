@@ -86,4 +86,18 @@ function toggleNoEntries() {
   }
 }
 
+function viewSwap(viewName) {
+  // console.log("View provided as arguement:", viewName);
+
+  switch (viewName) {
+    case 'entries':
+      data.view = 'entries';
+      break;
+    case 'entry-form':
+      data.view = 'entry-form';
+      break;
+  }
+  // console.log("value of data.view:", data.view)
+}
 toggleNoEntries();
+viewSwap('entries');
