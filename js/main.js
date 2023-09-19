@@ -33,9 +33,6 @@ function addButtonHandler(event) {
 }
 
 function renderEntry(entry) {
-  const $divRowListItem = document.createElement('div');
-  const $divColumnFullListItem = document.createElement('div');
-  const $ulEntry = document.createElement('ul');
   const $liEntry = document.createElement('li');
   const $imgEntryImage = document.createElement('img');
   const $divTitleList = document.createElement('div');
@@ -43,16 +40,11 @@ function renderEntry(entry) {
   const $divNotesEntry = document.createElement('div');
   const $pNotes = document.createElement('p');
 
-  $divRowListItem.className = 'row';
-  $divColumnFullListItem.className = 'column-full';
   $imgEntryImage.className = 'image';
   $imgEntryImage.setAttribute('src', entry.photoUrl);
   $h2EntryTitle.textContent = entry.title;
   $pNotes.textContent = entry.notes;
 
-  $divRowListItem.appendChild($divColumnFullListItem);
-  $divColumnFullListItem.appendChild($ulEntry);
-  $ulEntry.appendChild($liEntry);
   $liEntry.appendChild($imgEntryImage);
   $liEntry.appendChild($divTitleList);
   $liEntry.appendChild($divNotesEntry);
@@ -60,9 +52,6 @@ function renderEntry(entry) {
   $divNotesEntry.appendChild($pNotes);
 
   /*  This function creates the following dom tree in which a journal entry's properties are displayed:
-          <div class="row">
-          <div class="column-full">
-            <ul>
               <li>
                 <img
                   class="image"
@@ -75,18 +64,15 @@ function renderEntry(entry) {
                   <p>Notes go here</p>
                 </div>
               </li>
-            </ul>
-          </div>
-        </div>
         */
-  // console.log("DOM Tree template with list entry:", $divRowListItem);
+  return $liEntry;
 }
 
-const testEntry = {
-  title: 'Burger',
-  photoUrl: 'BurgerURL',
-  notes: 'Notes go here',
-  entryID: 1,
-};
-
-renderEntry(testEntry);
+document.addEventListener('DOMContentLoaded', loadEntryListItems);
+const $divDataViewEntries = document.querySelector('#entry-list');
+function loadEntryListItems(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const $renderedListItem = renderEntry(data.entries[i]);
+    $divDataViewEntries.appendChild($renderedListItem);
+  }
+}
