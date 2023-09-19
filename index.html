@@ -20,13 +20,16 @@
       <div class="container">
         <div class="row">
           <div class="column-full">
-            <h1>Code Journal</h1>
+            <div class="navbar">
+              <h1>Code Journal</h1>
+              <a class="anchor" href="">Entries</a>
+            </div>
           </div>
         </div>
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form">
+      <div data-view="entry-form" class="hidden">
         <form class="journal-entry">
           <div class="row">
             <div class="column-full">
@@ -70,16 +73,13 @@
           </div>
         </form>
       </div>
-      <div data-view="entries" class="hidden">
-        <div class="row">
-          <div class="column-full">
-            <ul id="entry-list">
-              <li>
-                <span class="no-entries"> There are no entries to show.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div data-view="entries" class="">
+        <h1>Entries</h1>
+        <ul id="entry-list">
+          <li>
+            <span class="no-entries"> There are no entries to show.</span>
+          </li>
+        </ul>
       </div>
     </main>
     <script src="js/data.js"></script>

@@ -33,6 +33,9 @@ function addButtonHandler(event) {
 }
 
 function renderEntry(entry) {
+  const $divRow = document.createElement('div');
+  const $divColumn = document.createElement('div');
+  const $divColumn2 = document.createElement('div');
   const $liEntry = document.createElement('li');
   const $imgEntryImage = document.createElement('img');
   const $divTitleList = document.createElement('div');
@@ -40,12 +43,18 @@ function renderEntry(entry) {
   const $divNotesEntry = document.createElement('div');
   const $pNotes = document.createElement('p');
 
+  $divRow.className = 'row';
+  $divColumn.className = 'column-half';
+  $divColumn2.className = 'column-half';
   $imgEntryImage.className = 'image';
   $imgEntryImage.setAttribute('src', entry.photoUrl);
   $h2EntryTitle.textContent = entry.title;
   $pNotes.textContent = entry.notes;
 
-  $liEntry.appendChild($imgEntryImage);
+  $divRow.appendChild($divColumn);
+  $divRow.appendChild($divColumn2);
+  $divColumn.appendChild($imgEntryImage);
+  $divColumn2.appendChild($liEntry);
   $liEntry.appendChild($divTitleList);
   $liEntry.appendChild($divNotesEntry);
   $divTitleList.appendChild($h2EntryTitle);
@@ -53,19 +62,24 @@ function renderEntry(entry) {
 
   /*  This function creates the following dom tree in which a journal entry's properties are displayed:
               <li>
+              <div class ="row">
+              <div class = "column half">
                 <img
                   class="image"
                   src=""
                   alt="" />
+                </div>
+                <div class = "column-half">
                 <div>
                   <h2>title goes here</h2>
                 </div>
                 <div>
                   <p>Notes go here</p>
                 </div>
+                </div>
               </li>
         */
-  return $liEntry;
+  return $divRow;
 }
 
 document.addEventListener('DOMContentLoaded', loadEntryListItems);
