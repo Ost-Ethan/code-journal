@@ -1,5 +1,6 @@
 const $photoUrl = document.querySelector('#photo-url');
 const $image = document.querySelector('.image');
+const $pNoEntries = document.querySelector('#no-entries');
 
 $photoUrl.addEventListener('input', handlePhotoUrlInput);
 
@@ -42,9 +43,8 @@ function addButtonHandler(event) {
   $divDataViewEntries.prepend(renderEntry(journalEntry));
 
   viewSwap($entriesButton); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
-  if (data.entries.length === 0) {
-    toggleNoEntries();
-  }
+
+  toggleNoEntries();
 }
 
 function renderEntry(entry) {
@@ -101,7 +101,13 @@ document.addEventListener('DOMContentLoaded', loadEntryListItems);
 
 const $divDataViewEntries = document.querySelector('#entry-list');
 
-const $spanNoEntries = document.querySelector('.no-entries');
+function toggleNoEntries() {
+  if (data.entries.length > 0) {
+    $pNoEntries.setAttribute('class', 'hidden');
+  } else {
+    $pNoEntries.removeAttribute('class');
+  }
+}
 
 function loadEntryListItems(event) {
   // This function sees if there are any entries in local storage and then renders them on the entries page.
@@ -110,18 +116,10 @@ function loadEntryListItems(event) {
     const $renderedListItem = renderEntry(data.entries[i]);
     $divDataViewEntries.appendChild($renderedListItem);
   }
-  viewSwap(data.view);
-  if (data.entries.length === 0) {
-    toggleNoEntries();
-  }
-}
 
-function toggleNoEntries() {
-  if ($spanNoEntries.className === 'no-entries') {
-    $spanNoEntries.className = 'no-entries hidden';
-  } else {
-    $spanNoEntries.className = 'no entries';
-  }
+  toggleNoEntries();
+
+  viewSwap(data.view);
 }
 
 function viewSwap(viewName) {
