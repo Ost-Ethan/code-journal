@@ -76,3 +76,7 @@ a {
   justify-content: space-between;
   flex-basis: 100%;
 }
+
+#no-entries {
+  text-align: center;
+}

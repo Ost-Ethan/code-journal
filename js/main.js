@@ -51,7 +51,7 @@ function renderEntry(entry) {
   const $divRow = document.createElement('div');
   const $divColumn = document.createElement('div');
   const $divColumn2 = document.createElement('div');
-  const $liEntry = document.createElement('li');
+  const $outerLI = document.createElement('li');
   const $imgEntryImage = document.createElement('img');
   const $divTitleList = document.createElement('div');
   const $h2EntryTitle = document.createElement('h2');
@@ -66,12 +66,12 @@ function renderEntry(entry) {
   $h2EntryTitle.textContent = entry.title;
   $pNotes.textContent = entry.notes;
 
+  $outerLI.appendChild($divRow);
   $divRow.appendChild($divColumn);
   $divRow.appendChild($divColumn2);
   $divColumn.appendChild($imgEntryImage);
-  $divColumn2.appendChild($liEntry);
-  $liEntry.appendChild($divTitleList);
-  $liEntry.appendChild($divNotesEntry);
+  $divColumn2.appendChild($divTitleList);
+  $divColumn2.appendChild($divNotesEntry);
   $divTitleList.appendChild($h2EntryTitle);
   $divNotesEntry.appendChild($pNotes);
 
@@ -94,7 +94,7 @@ function renderEntry(entry) {
                 </div>
               </li>
         */
-  return $divRow;
+  return $outerLI;
 }
 
 document.addEventListener('DOMContentLoaded', loadEntryListItems);
