@@ -70,9 +70,20 @@ function renderEntry(entry) {
 
 document.addEventListener('DOMContentLoaded', loadEntryListItems);
 const $divDataViewEntries = document.querySelector('#entry-list');
+const $spanNoEntries = document.querySelector('.no-entries');
 function loadEntryListItems(event) {
   for (let i = 0; i < data.entries.length; i++) {
     const $renderedListItem = renderEntry(data.entries[i]);
     $divDataViewEntries.appendChild($renderedListItem);
   }
 }
+
+function toggleNoEntries() {
+  if ($spanNoEntries.className === 'no-entries')
+    $spanNoEntries.className = 'no-entries hidden';
+  else {
+    $spanNoEntries.className = 'no-entries';
+  }
+}
+
+toggleNoEntries();
