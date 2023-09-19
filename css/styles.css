@@ -43,6 +43,10 @@ header {
   border-radius: 0.5rem;
 }
 
+ul {
+  padding-left: 0;
+}
+
 li {
   list-style-type: none;
 }
