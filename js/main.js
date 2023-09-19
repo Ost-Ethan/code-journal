@@ -42,7 +42,7 @@ function addButtonHandler(event) {
   // Rendering the entry and prepending it to the list
   $divDataViewEntries.prepend(renderEntry(journalEntry));
 
-  viewSwap($entriesButton); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
+  viewSwap('entries'); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
 
   toggleNoEntries();
 }
@@ -63,6 +63,7 @@ function renderEntry(entry) {
   $divColumn2.className = 'column-half';
   $imgEntryImage.className = 'image';
   $imgEntryImage.setAttribute('src', entry.photoUrl);
+  $imgEntryImage.setAttribute('alt', 'journal entry image');
   $h2EntryTitle.textContent = entry.title;
   $pNotes.textContent = entry.notes;
 
@@ -122,23 +123,25 @@ function loadEntryListItems(event) {
   viewSwap(data.view);
 }
 
-function viewSwap(viewName) {
-  // This function is called on when switching views. It looks to see what target clicked the button, and then changes data.view to reflect the anchor clicked. I gave the OR operator, as when we click the submit button, i pass the element "$entriesButton" itself as viewName. A bit backwards, but it works.
-  if (viewName.target === $entriesButton || viewName === $entriesButton) {
-    data.view = 'entries';
-    $entryFormDataView.className = 'hidden';
-  } else if (
-    viewName.target === $newEntryButton ||
-    viewName === $newEntryButton
-  ) {
-    data.view = 'entry-form';
+function handleViewSwap(event) {
+  if (event.target === $entriesButton) {
+    viewSwap('entries');
+  } else if (event.target === $newEntryButton) {
+    viewSwap('entry-form');
   }
-  if (data.view === 'entries') {
-    $entryFormDataView.className = 'hidden';
-    $entriesDataView.className = '';
-  } else if (data.view === 'entry-form') {
-    $entryFormDataView.className = '';
-    $entriesDataView.className = 'hidden';
+}
+function viewSwap(viewName) {
+  // This function is called on when switching views. it is passed a view to switch to by the handler, and then switches the view accordingly.
+  if (viewName === 'entries') {
+    data.view = 'entries';
+    $entryFormDataView.setAttribute('class', 'hidden');
+    $entriesDataView.setAttribute('class', '');
+  }
+
+  if (viewName === 'entry-form') {
+    data.view = 'entry-form';
+    $entryFormDataView.setAttribute('class', '');
+    $entriesDataView.setAttribute('class', 'hidden');
   }
 }
 
@@ -146,6 +149,5 @@ const $entryFormDataView = document.querySelector('#entry-form');
 const $entriesDataView = document.querySelector('#entries');
 const $newEntryButton = document.querySelector('.new-entry-button');
 const $entriesButton = document.querySelector('.head-anchor');
-$entriesButton.addEventListener('click', viewSwap);
-$newEntryButton.addEventListener('click', viewSwap);
-toggleNoEntries();
+$entriesButton.addEventListener('click', handleViewSwap);
+$newEntryButton.addEventListener('click', handleViewSwap);
