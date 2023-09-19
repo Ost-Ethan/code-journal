@@ -102,16 +102,20 @@ function toggleNoEntries() {
 
 function viewSwap(viewName) {
   // console.log("View provided as arguement:", viewName);
+  // console.log("viewName.target", viewName.target);
 
-  switch (viewName) {
-    case 'entries':
-      data.view = 'entries';
-      break;
-    case 'entry-form':
-      data.view = 'entry-form';
-      break;
+  if (viewName.target === $entriesButton) {
+    data.view = 'entries';
+  } else if (viewName.target === $newEntryButton) {
+    data.view = 'entry-form';
   }
+
   // console.log("value of data.view:", data.view)
 }
+
+const $newEntryButton = document.querySelector('.new-entry-button');
+const $entriesButton = document.querySelector('.head-anchor');
+$entriesButton.addEventListener('click', viewSwap);
+$newEntryButton.addEventListener('click', viewSwap);
 toggleNoEntries();
 viewSwap('entries');
