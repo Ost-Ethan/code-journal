@@ -50,3 +50,29 @@ ul {
 li {
   list-style-type: none;
 }
+
+a {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  align-self: center;
+  margin: 0 1rem;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.new-entry-button {
+  background-color: #4c2474;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 100%;
+}
