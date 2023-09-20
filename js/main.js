@@ -166,6 +166,9 @@ function viewSwap(viewName) {
     data.view = 'entries';
     $entryFormDataView.setAttribute('class', 'hidden');
     $entriesDataView.setAttribute('class', '');
+    $journalForm.reset();
+    data.editing = null;
+    $h1EditFormHeader.textContent = 'New Entry';
   }
 
   if (viewName === 'entry-form') {
