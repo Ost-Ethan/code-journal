@@ -57,14 +57,14 @@ function addButtonHandler(event) {
     // This for loop looks through the data-entry-id of each li element to see if the entry id matches. it needs a -1 due to the starting number of the entryID in data.js, and then it replaces the child that matches in the ul element.
     for (let i = 0; i < $liArrayList.length; i++) {
       if (
-        $liArrayList[i].getAttribute('data-entry-id') - 1 ===
+        parseInt($liArrayList[i].getAttribute('data-entry-id')) ===
         editedJournalEntry.entryID
       ) {
         $ulDataViewEntries.replaceChild(
           renderEntry(editedJournalEntry),
-          $liArrayList[i - 1]
+          $liArrayList[i]
         );
-        data.entries[i - 1] = editedJournalEntry;
+        data.entries[i] = editedJournalEntry;
       }
     }
     $h1EditFormHeader.textContent = 'New Entry';
@@ -198,12 +198,18 @@ function handleEditClick(event) {
 
   if (event.target.className === 'fa-solid fa-pencil icon') {
     const $clickedEntry = event.target.closest('li');
-    const $clickedEntryId = $clickedEntry.getAttribute('data-entry-id') - 1;
-    data.editing = data.entries[$clickedEntryId];
-    viewSwap('entry-form');
-    $photoUrl.value = data.editing.photoUrl;
-    $title.value = data.editing.title;
-    $notes.value = data.editing.notes;
-    $h1EditFormHeader.textContent = 'Edit Entry';
+    for (let i = 0; i < data.entries.length; i++) {
+      if (
+        parseInt($clickedEntry.getAttribute('data-entry-id')) ===
+        data.entries[i].entryID
+      ) {
+        data.editing = data.entries[i];
+        viewSwap('entry-form');
+        $photoUrl.value = data.editing.photoUrl;
+        $title.value = data.editing.title;
+        $notes.value = data.editing.notes;
+        $h1EditFormHeader.textContent = 'Edit Entry';
+      }
+    }
   }
 }
