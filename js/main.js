@@ -155,12 +155,16 @@ $newEntryButton.addEventListener('click', function () {
 });
 
 $ulDataViewEntries.addEventListener('click', handleEditClick);
-
+const $h1EditFormHeader = document.querySelector('.edit-form-header');
 function handleEditClick(event) {
   if (event.target.className === 'fa-solid fa-pencil icon') {
     const $clickedEntry = event.target.closest('li');
     const $clickedEntryId = $clickedEntry.getAttribute('data-entry-id') - 1;
     data.editing = data.entries[$clickedEntryId];
     viewSwap('entry-form');
+    $photoUrl.value = data.editing.photoUrl;
+    $title.value = data.editing.title;
+    $notes.value = data.editing.notes;
+    $h1EditFormHeader.textContent = 'Edit Entry';
   }
 }
