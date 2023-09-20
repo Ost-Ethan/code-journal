@@ -69,8 +69,10 @@ function addButtonHandler(event) {
     }
     $h1EditFormHeader.textContent = 'New Entry';
     data.editing = null;
+    $journalForm.reset();
   }
 
+  $journalForm.reset();
   viewSwap('entries'); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
 
   toggleNoEntries();
