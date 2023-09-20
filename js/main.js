@@ -123,13 +123,6 @@ function loadEntryListItems(event) {
   viewSwap(data.view);
 }
 
-function handleViewSwap(event) {
-  if (event.target === $entriesButton) {
-    viewSwap('entries');
-  } else if (event.target === $newEntryButton) {
-    viewSwap('entry-form');
-  }
-}
 function viewSwap(viewName) {
   // This function is called on when switching views. it is passed a view to switch to by the handler, and then switches the view accordingly.
   if (viewName === 'entries') {
@@ -149,5 +142,9 @@ const $entryFormDataView = document.querySelector('#entry-form');
 const $entriesDataView = document.querySelector('#entries');
 const $newEntryButton = document.querySelector('.new-entry-button');
 const $entriesButton = document.querySelector('.head-anchor');
-$entriesButton.addEventListener('click', handleViewSwap);
-$newEntryButton.addEventListener('click', handleViewSwap);
+$entriesButton.addEventListener('click', function () {
+  viewSwap('entries');
+});
+$newEntryButton.addEventListener('click', function () {
+  viewSwap('entry-form');
+});
