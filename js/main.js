@@ -32,15 +32,15 @@ function addButtonHandler(event) {
     notes: $notes.value,
     entryID: data.nextEntryId,
   };
-  data.nextEntryId++;
-  data.entries.unshift(journalEntry);
 
+  data.entries.push(journalEntry);
+  data.nextEntryId++;
   // Resetting the form after parsing
   $journalForm.reset();
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   // Rendering the entry and prepending it to the list
-  $divDataViewEntries.prepend(renderEntry(journalEntry));
+  $ulDataViewEntries.prepend(renderEntry(journalEntry));
 
   viewSwap('entries'); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
 
@@ -69,7 +69,7 @@ function renderEntry(entry) {
   $pNotes.textContent = entry.notes;
   $pencilIcon.setAttribute('class', 'fa-solid fa-pencil icon');
   $divTitleList.setAttribute('class', 'entry-title');
-  $outerLI.setAttribute('id', entry.entryID);
+  $outerLI.setAttribute('data-entry-id', entry.entryID);
 
   $outerLI.appendChild($divRow);
   $divRow.appendChild($divColumn);
@@ -105,7 +105,7 @@ function renderEntry(entry) {
 
 document.addEventListener('DOMContentLoaded', loadEntryListItems);
 
-const $divDataViewEntries = document.querySelector('#entry-list');
+const $ulDataViewEntries = document.querySelector('#entry-list');
 
 function toggleNoEntries() {
   if (data.entries.length > 0) {
@@ -120,7 +120,7 @@ function loadEntryListItems(event) {
 
   for (let i = 0; i < data.entries.length; i++) {
     const $renderedListItem = renderEntry(data.entries[i]);
-    $divDataViewEntries.appendChild($renderedListItem);
+    $ulDataViewEntries.appendChild($renderedListItem);
   }
 
   toggleNoEntries();
@@ -153,3 +153,14 @@ $entriesButton.addEventListener('click', function () {
 $newEntryButton.addEventListener('click', function () {
   viewSwap('entry-form');
 });
+
+$ulDataViewEntries.addEventListener('click', handleEditClick);
+
+function handleEditClick(event) {
+  if (event.target.className === 'fa-solid fa-pencil icon') {
+    const $clickedEntry = event.target.closest('li');
+    const $clickedEntryId = $clickedEntry.getAttribute('data-entry-id') - 1;
+    data.editing = data.entries[$clickedEntryId];
+    viewSwap('entry-form');
+  }
+}
