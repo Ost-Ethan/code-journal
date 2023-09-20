@@ -57,6 +57,7 @@ function renderEntry(entry) {
   const $h2EntryTitle = document.createElement('h2');
   const $divNotesEntry = document.createElement('div');
   const $pNotes = document.createElement('p');
+  const $pencilIcon = document.createElement('i');
 
   $divRow.className = 'row';
   $divColumn.className = 'column-half';
@@ -66,6 +67,8 @@ function renderEntry(entry) {
   $imgEntryImage.setAttribute('alt', 'journal entry image');
   $h2EntryTitle.textContent = entry.title;
   $pNotes.textContent = entry.notes;
+  $pencilIcon.setAttribute('class', 'fa-solid fa-pencil icon');
+  $divTitleList.setAttribute('class', 'entry-title');
 
   $outerLI.appendChild($divRow);
   $divRow.appendChild($divColumn);
@@ -75,6 +78,7 @@ function renderEntry(entry) {
   $divColumn2.appendChild($divNotesEntry);
   $divTitleList.appendChild($h2EntryTitle);
   $divNotesEntry.appendChild($pNotes);
+  $divTitleList.appendChild($pencilIcon);
 
   /*  This function creates the following dom tree in which a journal entry's properties are displayed:
               <li>
