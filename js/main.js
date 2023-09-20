@@ -64,6 +64,7 @@ function addButtonHandler(event) {
           renderEntry(editedJournalEntry),
           $liArrayList[i - 1]
         );
+        data.entries[i - 1] = editedJournalEntry;
       }
     }
     $h1EditFormHeader.textContent = 'New Entry';
