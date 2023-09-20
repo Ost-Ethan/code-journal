@@ -69,6 +69,7 @@ function renderEntry(entry) {
   $pNotes.textContent = entry.notes;
   $pencilIcon.setAttribute('class', 'fa-solid fa-pencil icon');
   $divTitleList.setAttribute('class', 'entry-title');
+  $outerLI.setAttribute('id', entry.entryID);
 
   $outerLI.appendChild($divRow);
   $divRow.appendChild($divColumn);
