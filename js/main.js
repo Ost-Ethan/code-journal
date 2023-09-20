@@ -110,7 +110,7 @@ function renderEntry(entry) {
   $divTitleList.appendChild($pencilIcon);
 
   /*  This function creates the following dom tree in which a journal entry's properties are displayed:
-              <li>
+              <li data-entry-id>
               <div class ="row">
               <div class = "column half">
                 <img
@@ -119,8 +119,9 @@ function renderEntry(entry) {
                   alt="" />
                 </div>
                 <div class = "column-half">
-                <div>
+                <div class = "entry-title">
                   <h2>title goes here</h2>
+                  <i class="fa-solid fa-pencil"></i>
                 </div>
                 <div>
                   <p>Notes go here</p>
@@ -183,6 +184,7 @@ $newEntryButton.addEventListener('click', function () {
 });
 
 $ulDataViewEntries.addEventListener('click', handleEditClick);
+
 const $h1EditFormHeader = document.querySelector('.edit-form-header');
 
 function handleEditClick(event) {
