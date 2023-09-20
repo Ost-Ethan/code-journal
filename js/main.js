@@ -25,22 +25,50 @@ function addButtonHandler(event) {
 
   // This parses the data input by the user, prepends it to the list of entries, and switches the view to the entries view.
 
-  // Data parsing
-  const journalEntry = {
-    title: $title.value,
-    photoUrl: $photoUrl.value,
-    notes: $notes.value,
-    entryID: data.nextEntryId,
-  };
+  // Data parsing if it is not an edited form.
+  if (data.editing === null) {
+    const journalEntry = {
+      title: $title.value,
+      photoUrl: $photoUrl.value,
+      notes: $notes.value,
+      entryID: data.nextEntryId,
+    };
 
-  data.entries.push(journalEntry);
-  data.nextEntryId++;
-  // Resetting the form after parsing
-  $journalForm.reset();
-  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+    data.entries.push(journalEntry);
+    data.nextEntryId++;
+    // Resetting the form after parsing
+    $journalForm.reset();
+    $image.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  // Rendering the entry and prepending it to the list
-  $ulDataViewEntries.prepend(renderEntry(journalEntry));
+    // Rendering the entry and prepending it to the list
+    $ulDataViewEntries.prepend(renderEntry(journalEntry));
+  }
+
+  // if the entry is being edited:
+  else if (data.editing !== null) {
+    const editedJournalEntry = {
+      title: $title.value,
+      photoUrl: $photoUrl.value,
+      notes: $notes.value,
+      entryID: data.editing.entryID,
+    };
+
+    const $liArrayList = document.querySelectorAll('li');
+    // This for loop looks through the data-entry-id of each li element to see if the entry id matches. it needs a -1 due to the starting number of the entryID in data.js, and then it replaces the child that matches in the ul element.
+    for (let i = 0; i < $liArrayList.length; i++) {
+      if (
+        $liArrayList[i].getAttribute('data-entry-id') - 1 ===
+        editedJournalEntry.entryID
+      ) {
+        $ulDataViewEntries.replaceChild(
+          renderEntry(editedJournalEntry),
+          $liArrayList[i - 1]
+        );
+      }
+    }
+    $h1EditFormHeader.textContent = 'New Entry';
+    data.editing = null;
+  }
 
   viewSwap('entries'); // Using my parsed entries button here makes sure the argument i give the function matches what it is expecting.
 
@@ -156,7 +184,10 @@ $newEntryButton.addEventListener('click', function () {
 
 $ulDataViewEntries.addEventListener('click', handleEditClick);
 const $h1EditFormHeader = document.querySelector('.edit-form-header');
+
 function handleEditClick(event) {
+  // this function is triggered on the ul element, with delegation, it looks to see if the element class clicked was the pencil icon, and then it find the closest li element and sets the data.editing tag to the selected li object. we then viewswap to the entry-form view, and place the entries values into the form, and finally it changes the header to say edit entry.
+
   if (event.target.className === 'fa-solid fa-pencil icon') {
     const $clickedEntry = event.target.closest('li');
     const $clickedEntryId = $clickedEntry.getAttribute('data-entry-id') - 1;
