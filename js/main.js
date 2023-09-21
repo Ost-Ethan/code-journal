@@ -34,7 +34,7 @@ function addButtonHandler(event) {
       entryID: data.nextEntryId,
     };
 
-    data.entries.push(journalEntry);
+    data.entries.unshift(journalEntry);
     data.nextEntryId++;
     // Resetting the form after parsing
     $journalForm.reset();
