@@ -33,7 +33,23 @@ header {
 
 .button-justify {
   display: flex;
-  justify-content: end;
+  justify-content: right;
+}
+
+.delete-justify {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: left;
+}
+
+.footer-buttons {
+  display: flex;
+}
+
+#delete-entry {
+  border-style: hidden;
+  text-decoration: underline;
+  color: #f81212;
 }
 
 .save {
@@ -88,4 +104,58 @@ a {
 
 .icon {
   align-self: center;
+}
+
+.modal-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal-message {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-family: sans-serif;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-basis: 100%;
+  margin: 0.25rem;
+  justify-content: space-between;
+}
+
+#confirm-delete {
+  background-color: #dc2626;
+  color: white;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  border-style: hidden;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+#cancel-button {
+  background-color: #b6b6b6;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  border-style: hidden;
+  border-radius: 0.5rem;
+  font-weight: 600;
 }

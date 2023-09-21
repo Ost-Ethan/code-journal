@@ -16,6 +16,27 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <div data-view="delete-entry-modal" class="hidden" id="delete-modal">
+      <div class="container">
+        <div class="row">
+          <div class="column-full">
+            <div class="modal-background">
+              <div class="modal-message">
+                <div class="row">
+                  <p>Are you sure you would like to delete this entry?</p>
+                </div>
+                <div class="row">
+                  <div class="modal-buttons">
+                    <button id="cancel-button">Cancel</button>
+                    <button id="confirm-delete">Confirm</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <header>
       <div class="container">
         <div class="row">
@@ -66,14 +87,21 @@
           </div>
           <div class="row">
             <div class="column-full">
-              <div class="button-justify">
-                <button class="save" type="submit">Save</button>
+              <div class="footer-buttons">
+                <div class="delete-justify">
+                  <button id="delete-entry" class="" type="button">
+                    Delete Entry
+                  </button>
+                </div>
+                <div class="button-justify">
+                  <button class="save" type="submit">Save</button>
+                </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-      <div data-view="entries" class="" id="entries">
+      <div data-view="entries" class="hidden" id="entries">
         <div class="row">
           <div class="entry-header">
             <h1>Entries</h1>

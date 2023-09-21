@@ -1,6 +1,7 @@
 const $photoUrl = document.querySelector('#photo-url');
 const $image = document.querySelector('.image');
 const $pNoEntries = document.querySelector('#no-entries');
+const $buttonDeleteEntry = document.querySelector('#delete-entry');
 
 $photoUrl.addEventListener('input', handlePhotoUrlInput);
 
@@ -52,7 +53,6 @@ function addButtonHandler(event) {
       notes: $notes.value,
       entryID: data.editing.entryID,
     };
-
     const $liArrayList = document.querySelectorAll('li');
     // This for loop looks through the data-entry-id of each li element to see if the entry id matches. it needs a -1 due to the starting number of the entryID in data.js, and then it replaces the child that matches in the ul element.
     for (let i = 0; i < $liArrayList.length; i++) {
@@ -175,6 +175,11 @@ function viewSwap(viewName) {
     data.view = 'entry-form';
     $entryFormDataView.setAttribute('class', '');
     $entriesDataView.setAttribute('class', 'hidden');
+    if (data.editing !== null) {
+      $buttonDeleteEntry.setAttribute('class', '');
+    } else {
+      $buttonDeleteEntry.setAttribute('class', 'hidden');
+    }
   }
 }
 
@@ -211,5 +216,52 @@ function handleEditClick(event) {
         $h1EditFormHeader.textContent = 'Edit Entry';
       }
     }
+  }
+}
+
+const $viewDeleteModal = document.querySelector('#delete-modal');
+
+$buttonDeleteEntry.addEventListener('click', deleteClickHandler);
+
+function deleteClickHandler(event) {
+  // if the delete entry button is clicked, display modal
+  if (event.target.getAttribute('id', 'delete-entry')) {
+    $viewDeleteModal.setAttribute('class', '');
+  }
+}
+
+$viewDeleteModal.addEventListener('click', modalButtonHandler);
+
+function modalButtonHandler(event) {
+  // cancel button is clicked
+  if (event.target.getAttribute('id') === 'cancel-button') {
+    $viewDeleteModal.setAttribute('class', 'hidden');
+  }
+
+  // Delete button is clicked
+  if (event.target.getAttribute('id') === 'confirm-delete') {
+    // look through data model and remove the entry from the data model
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.editing.entryID === data.entries[i].entryID) {
+        data.entries.splice(i, 1);
+      }
+    }
+    // look through current li elements on the page and remove it from the page
+    const $liArrayList = document.querySelectorAll('li');
+    for (let i = 0; $liArrayList.length; i++) {
+      if (
+        data.editing.entryID ===
+        Number($liArrayList[i].getAttribute('data-entry-id'))
+      ) {
+        $liArrayList[i].remove();
+        break;
+      }
+    }
+
+    // Reset view to entries, hide the modal, set data editing to null, and run toggleNoEntries to see if no entry text needs to be displayed
+    $viewDeleteModal.setAttribute('class', 'hidden');
+    toggleNoEntries();
+    viewSwap('entries');
+    data.editing = null;
   }
 }
