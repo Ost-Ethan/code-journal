@@ -33,7 +33,23 @@ header {
 
 .button-justify {
   display: flex;
-  justify-content: end;
+  justify-content: right;
+}
+
+.delete-justify {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: left;
+}
+
+.footer-buttons {
+  display: flex;
+}
+
+#delete-entry {
+  border-style: hidden;
+  text-decoration: underline;
+  color: #f81212;
 }
 
 .save {

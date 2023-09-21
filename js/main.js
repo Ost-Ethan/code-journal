@@ -1,6 +1,7 @@
 const $photoUrl = document.querySelector('#photo-url');
 const $image = document.querySelector('.image');
 const $pNoEntries = document.querySelector('#no-entries');
+const $buttonDeleteEntry = document.querySelector('#delete-entry');
 
 $photoUrl.addEventListener('input', handlePhotoUrlInput);
 
@@ -175,6 +176,11 @@ function viewSwap(viewName) {
     data.view = 'entry-form';
     $entryFormDataView.setAttribute('class', '');
     $entriesDataView.setAttribute('class', 'hidden');
+    if (data.editing !== null) {
+      $buttonDeleteEntry.setAttribute('class', '');
+    } else {
+      $buttonDeleteEntry.setAttribute('class', 'hidden');
+    }
   }
 }
 
