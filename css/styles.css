@@ -80,3 +80,12 @@ a {
 #no-entries {
   text-align: center;
 }
+
+.entry-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  align-self: center;
+}
